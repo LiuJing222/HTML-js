@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            name: "Lily",
+            age: 20,
+            hobby: "swimming",
+        };
+        Object.defineProperty(obj, "married", {
+            value: false,
+            writable: true,
+            enumerable: false,
+            configurable: false
+        });
+        for (var key in obj) {
+            console.log(key);
+        }
+
+        //思考下述代码能否输出x属性，若不想输出x属性，如何通过修改x属性的特性来实现？
+        var objOrigin = {x:1};
+        obj.__proto__ = objOrigin;
+        for (var key in obj) {
+            console.log(key);
+        }
+    </script>
+</body>
+
+</html>

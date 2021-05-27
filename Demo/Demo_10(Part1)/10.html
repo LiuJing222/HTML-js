@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var A = function() {};
+      A.prototype.n = 1;
+      var b = new A();
+
+      A.prototype = { n: 2, m: 3 };//若屏蔽这句话，结果又是什么？
+      //A.prototype.m=3;//若屏蔽上边一行，并添加此行，结果又是什么？
+      var c = new A();
+
+      console.log(b.n, b.m, c.n, c.m); //??
+      console.log(b.__proto__ === c.__proto__);//??
+      console.log(b.__proto__ === A.prototype);//?? b的__proto__什么时候和A.prototype断开的
+
+      //思考下述代码，原理同上
+      var a = {x:1};
+      var b = {};
+      b.__proto__ = a;
+      var c={};
+      a = {x:2};
+      c.__proto__ = a;
+      console.log(b.__proto__ === c.__proto__);//
+    </script>
+  </body>
+</html>

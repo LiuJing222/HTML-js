@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      var obj = {
+        //自有方法
+        name: "Lily",
+        age: 20,
+        hobby: "swimming"
+      };
+      //继承方法 可枚举属性
+      obj.__proto__.sayName = function() {
+        console.log("Hello,我的名字是" + this.name);
+      };
+      Object.defineProperty(obj, "married", {
+        value: false,
+        writable: true,
+        enumerable: false, //不可枚举
+        configurable: false
+      });
+
+      //hasOwnProperty定义在原型对象上  所用实例都可以访问
+      console.log(obj.hasOwnProperty("name")); //true
+      console.log(obj.hasOwnProperty("toString")); //false
+
+      //getOwnPropertyNames定义在Object对象上 是静态属性 只能够通过Object构造函数使用
+      console.log(Object.getOwnPropertyNames(obj));
+
+      console.log("name" in obj); //true
+      console.log("married" in obj); //true
+      console.log("sayName" in obj); //true
+      console.log("married" in obj); //返回是什么，和后边for in对比，关于属性是否可枚举
+      //不可枚举也可指导
+
+      //遍历所有可枚举属性  为什么没有toString属性呢？
+      //不可枚举无法显示
+      for (var key in obj) {
+        console.log(key);
+      }
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>方括号</title>
+</head>
+
+<body>
+  <script>
+    // 方括号用于查找某个范围内的字符
+
+    //匹配[]方括号字符集中的任何字符。
+    var pattern = /[abc]/ig;
+    // var pattern = /[bt]/ig;
+    // var pattern = /[bt]o/ig;
+    var str = 'This is a box! this is a Box too!';
+    console.log(str);
+    console.log(str.replace(pattern, "$"));
+
+
+    // [^]匹配任何不在方括号字符集中的任意字符。
+    var pattern = /[^abc]/ig;
+    var str = 'This is a box! this is a Box too!';
+    console.log(str);
+    console.log(str.replace(pattern, "$"));
+
+    //字符集[0-9]  [a-z]  [A-Z]  [A-z]
+    var pattern = /[0-9]/g; //  \d
+    //var pattern=/[^0-9]/g;    //  \D
+    //var pattern=/[a-z]/ig;
+    //var pattern=/[0-9a-z_]/ig;//  \w
+    var str = "123456abc@qq.com - 123abc@onest";
+    console.log(str);
+    console.log(str.replace(pattern, "$"));
+
+
+    //练习
+    //字符类 []
+    console.log("absxsdfe123Ab".replace(/[abd]/,"X"));
+    console.log("absxsdfe123Ab".replace(/[abd]/g,"X"));
+    console.log("absxsdfe123Ab".replace(/[abd]/gi,"X"));
+
+    // 字符类 的取反 [^]
+    console.log("absxsdfe123Ab".replace(/[^abd]/,"X"));
+    console.log("absxsdfe123Ab".replace(/[^abd]/g,"X"));
+    console.log("absxsdfe123Ab".replace(/[^abd]/gi,"X"));
+
+    //范围类
+    console.log("12345667".replace(/[3-9]/gi,"X"));
+    console.log("absxsdfe123Ab".replace(/[a-f1-9]/gi,"X"));
+    console.log("absxsdfe123Ab".replace(/[a-f][1-9]/gi,"X"));//如果单独替换，则需要分组，见后续
+    console.log("absxsdfe1Q2e3Ab".replace(/[a-f][1-9][A-Z]/gi,"X"));
+
+    //思考：如何匹配 -
+    console.log("2017-10-23".replace(/[0-9]/g,"X"));
+    console.log("2017-10-23".replace(/[0-9-]/g,"X"));
+
+    //关于 . 除了回车和换行符之外的所有字符
+    /ab[0-9][^\r\n]/ //等效于/[ab\d.]/
+    console.log("@abc@123@".replace(/@./g,"Q"));
+    console.log("@abc@123@".replace(/.@/g,"Q"));
+
+    //关于边界 ^ $ \b \B
+    console.log("This is a Boy is".replace(/is/g,0));
+    console.log("This is a Boy is".replace(/^is/g,0));
+    console.log("This is a Boy is".replace(/is$/g,0));
+    console.log("This is a Boy is".replace(/is\b/g,0));
+    console.log("This is a Boy is".replace(/is\B/g,0));
+    console.log("This is a Boy is".replace(/\bis/g,0));
+    console.log("This is a Boy is".replace(/\Bis/g,0));
+
+    //量词 注意*在这里是量词，不是充当通配符，充当通配符的是 .
+    //? 出现0次或1次（最多出现1次）
+    console.log("AaBbAb_AaaBbbAba".replace(/Aa?/g,0));
+
+    //+ 出现1次或多次（至少出现1次）
+    console.log("AaBbAb_AaaBbbAba".replace(/Aa+/g,0));
+
+    //* 出现0次或多次（任意次）
+    console.log("AaBbAb_AaaBbbAba".replace(/Aa*/g,0));
+
+    //{n} 出现n次
+    console.log("AaBbAb_AaaBbbAba".replace(/Aa{1}/g,0));
+    console.log("AaBbAb_AaaBbbAba".replace(/Aa{2}/g,0));
+
+    //{n,m} 出现n到m次
+    console.log("AaBbAb_AaaBbbAba".replace(/Aa{1,2}/g,0));
+
+    //{n,} 出现至少n次
+    console.log("AaBbAb_AaaBbbAbaAaaaaaaAaaAaaa".replace(/Aa{2,}/g,0));
+    //console.log("AaBbAb_AaaBbbAbaAaaaaaaAaaAaaa".replace(/Aa{2,4}/g,0));
+
+    //注意：0到n次的写法{0,n}而不是{,n}
+
+    //思考：
+    var reg = /d{20}\w\d?\w+\d*\w{3,5}\d{3,}/;
+  </script>
+</body>
+
+</html>

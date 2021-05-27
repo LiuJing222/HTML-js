@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>选择和分组</title>
+</head>
+
+<body>
+  <script>
+    //选择
+    var pattern = /red|green|blue/g;
+    //var str ="color:red";
+    //var str ="color:green";
+    //var str ="color:blue";
+    var str = "color:red;background:blue;";
+    console.log(str);
+    console.log(str.replace(pattern, "$"));
+
+    //分组  获取  编号
+    var pattern = /8(.*)8a(.*)f/;
+    var str = "8ggggg8abcdef";
+    var arr = pattern.exec(str);
+    console.log(arr);
+    console.log(arr[1]);//第1个分组内容
+    console.log(arr[2]);//第2个分组内容
+
+    //练习
+    //正则表达式的分组
+    console.log("NameNameName_11111".replace(/Name{3}/,"X"));
+    console.log("NameNameName_11111".replace(/(Name){3}/,"X"));
+
+    console.log("a1b2c3d4e5".replace(/[a-z]\d{3}/,"X"));
+    console.log("a1b2c3d4e5".replace(/([a-z]\d){3}/,"X"));
+    console.log("a1b2c3d4e5".replace(/([a-z]\d){3,4}/,"X"));
+    console.log("a1b2c3d4e5".replace(/([a-z]\d){3,4}?/,"X"));
+
+    // 与分组相关的 或
+    "abcdefghijk".replace(/abcde|fghijk/g,"X");
+    "abcdefghijk_abcdehijk_abcfghijk".replace(/abc(de|fg)hijk/g,"X");
+
+    //练习：
+    //将"xxabccxxdexx"替换为"yyabccxxdeyy"
+    //"xx11xx".replace(/(\bxx)|(xx\b)/g,"yy");
+
+    //分组的 反向引用
+    //如何将2017-10-23转成10/23/2017
+    "2017-10-23".replace(/(\d{4})-(\d{2})-(\d{2})/,"$2/$3/$1");
+    console.log(RegExp.$1,RegExp.$2,RegExp.$3)
+
+    //分组的 忽略分组 （？：）
+    "2017-10-23".replace(/(?:\d{4})-(\d{2})-(\d{2})/,"$2/$3/$1");
+  </script>
+</body>
+
+</html>

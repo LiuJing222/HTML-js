@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Student(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        var stu = Student("Lucy", 20);//若Student前有new关键字，结果又如何？
+        console.log(typeof stu);
+    </script>
+</body>
+
+</html>

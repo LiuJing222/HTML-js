@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  //高阶函数——filter
+  var persons = [];
+  for(var i=15;i<25;i++){
+    var tempPerson = {age:i};
+    persons.push(tempPerson);
+  }
+  var fullAgePersons = persons.filter(function(person){
+    return person.age > 18;
+  });
+  console.log(fullAgePersons);
+
+  //补充案例：
+  var max = 10;
+  var fn = function (x) {
+      if(x > max){
+          console.log(max);
+      }
+  };
+  (function (f) {
+      var max = 100;
+      f(15);
+  })(fn);//是否有输出，如果有输出的话，输出什么？
+  </script>
+</body>
+</html>

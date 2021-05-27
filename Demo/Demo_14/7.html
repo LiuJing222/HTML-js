@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>match()方法</title>
+</head>
+
+<body>
+  <script>
+    //match()方法返回匹配的子串
+    var pattern = /This/;
+    // var pattern = /This/g; //匹配上一个和多个的返回形式不同
+    // var pattern = /(?!^)This/g; //如何只匹配后一个This
+    var str = "This is a box This is a box!";
+    console.log(str.match(pattern));
+
+    var regExp = /ab/i;
+    var matchResult = "xxAbcaaBbxyz".match(regExp);
+    console.log(matchResult);
+
+    var regExp = /ab/gi;
+    var matchResult = "xxAbcaaBbxyz".match(regExp);
+    console.log(matchResult);
+
+    var regExp = /a*b/gi; //注意*和.的区别 ，参见在线分析工具 https://regexper.com或https://jex.im/regulex
+    var matchResult = "xxAbcaaBbxyz".match(regExp);
+    console.log(matchResult);
+
+    var regExp = /a.b/gi;//注意*和.的区别 ，参见在线分析工具 https://regexper.com或https://jex.im/regulex
+    var matchResult = "xxAbcaaBbxyz".match(regExp);
+    console.log(matchResult);
+  </script>
+</body>
+
+</html>

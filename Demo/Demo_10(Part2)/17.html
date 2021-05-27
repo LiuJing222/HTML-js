@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+    //通过构造函数创建的对象的原型共享问题
+    //以下写法实现了原型继承，但存在原型共享的问题
+    //思考，name,age,id属性分别是添加到了那个对象上，这样写有什么问题？
+    //如何给每个Studnent对象添加自有的name属性
+    function Person(name,age){
+        this.name = name;
+        this.age = age
+    }
+    Person.prototype.showName = function(){console.log(this.name);};
+    function Student(name,age,id){
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+    Student.prototype = new Person("Mike",23);
+    var s1 = new Student("Bill",19,2017001);
+    var s2 = new Student("Lucy",21,2017002);
+
+    //测试如下代码，思考为什么，这样的继承有什么弊端，是否浪费内存
+    console.log(s1.name,s1.age,s1.id);
+    console.log(s2.name,s2.age,s2.id);
+    s1.__proto__.name = "Jack";
+    console.log(s2.name);
+    s2.__proto__.__proto__.age = 99;
+    console.log(s2.age);
+
+    console.log(s1);
+    console.log(s1.__proto__);
+    console.log(s1.__proto__.__proto__);
+
+    </script>
+  </body>
+</html>

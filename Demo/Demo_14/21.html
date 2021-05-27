@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+  <script>
+  //综合案例
+
+  /////
+  console.log(/oo/.test("moon"));
+  console.log(/oo\b/.test("moon"));
+  console.log(/oon\b/.test("moon"));
+  console.log(/\boo/.test("moon"));
+
+  console.log("moon".search(/oo/));//1
+  console.log("moon".search(/oo\b/));//-1
+  console.log("moon".search(/oon\b/));//1
+  console.log("moon".search(/\boo\b/));//-1
+
+  console.log(/oo\B/.test("moon"));
+  console.log(/oon\B/.test("moon"));
+  console.log(/oo\B/.test("moon"));
+  console.log(/\Boo\B/.test("moon"));
+
+  console.log("moon".match(/oo\B/));//["oo", index: 1, input: "moon"]
+  console.log("moonoonxoo".match(/oo\B/));//["oo", index: 1, input: "moonoonxoo"]
+  console.log("moon".match(/oon\B/));//null
+  console.log("moo".match(/\Boo\B/));//null
+
+  "noonday".replace(/\Boo/,"xx");//"nxxnday"
+  "noonday".search(/\Boo/);//1
+
+  //String.prototype.search 注意search忽略 全局g
+  console.log("a1b2c3d4".search(/1/));//返回index 1
+  console.log("a1b2c3d4".search(/f/));//返回index -1 没找到
+  console.log("a1b2c3d4".search(/\d/g));//返回index 1 忽略全局
+  console.log("a1b2c3d4".search(/\d\w/g));//返回index 1 忽略全局
+
+  //String.prototype.match 如果匹配不到返回null 匹配到了返回数组
+  // 包含的信息有index 原始字符串 有没有g影响很大
+  console.log("a1b2c3d4".match(/1/));//[ '1', index: 1, input: 'a1b2c3d4' ]
+  console.log("a1b2c3d4".match(/f/));//null
+  console.log("a1b2c3d4".match(/\d/));//[ '1', index: 1, input: 'a1b2c3d4' ]
+  console.log("a1b2c3d4".match(/\d/g));//[ '1', '2', '3', '4' ]
+
+  // String.prototype.replace
+  console.log("a,b,c,d".replace(",","X"));
+  console.log("a2b3c4d".replace(/[2-3]/,"X"));
+  console.log("a2b3c4d".replace(/[2-3]/g,"X"));
+
+  console.log("This is a Boy is".replace(/is/g,0));
+  console.log("This is a Boy is".replace(/^is/g,0));
+  console.log("This is a Boy is".replace(/is$/g,0));
+  console.log("This is a Boy is".replace(/is\b/g,0));
+  console.log("This is a Boy is".replace(/is\B/g,0));
+  console.log("This is a Boy is".replace(/\bis/g,0));
+  console.log("This is a Boy is".replace(/\Bis/g,0));
+
+  //String.prototype.split
+  console.log("a,b,c,d".split(","));
+  console.log("a2b3c4d".split(/\d/));
+
+  "abcdef21313sfsflsf1223jlnsa".match(/[a-h]/);
+  "abcdef21313sfsflsf1223jlnsa".match(/[a-h]/g);
+  "abcdef21313sfsflsf1223jlnsa".match(/[123efsa]/g);
+  "abcdef21313sfsflsf1223jlnsa".match(/[^123efsa]/g);
+  "abcdef21313sfsflsf1223jlnsa".match(/[1-2a-d]/g);
+  "hello world Hi you".match(/hello|world/);
+  "hello world Hi you".match(/hello|world/g);
+  "world Hi you".match(/hello|world/);
+  "THat hot hat".match(/h.t/);
+  "THat hot hat".match(/h.t/g);
+  "THat hot hat".match(/h.t/gi);
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    //test()方法
+
+    var pattern = /box/;
+    var str = "This is a box!";
+    console.log(pattern.test(str)); //匹配成功返回true  匹配不成功返回false
+
+    var regExp = /a/i;
+    console.log(regExp.test("ab"));
+    console.log(regExp.test("ab"));
+    console.log(regExp.test("ab"));
+    console.log(regExp.test("ab"));
+
+    var regExp = /a/gi;//思考如果加了g，循环了若干次后是true还是false，这是为什么？test中的lastIndex
+    console.log(regExp.test("ab"));//true
+    console.log(regExp.test("ab"));//false 为什么？
+    console.log(regExp.test("ab"));//true
+    console.log(regExp.test("ab"));//false 为什么？
+    
+    while (regExp.test("aaa")){
+        console.log(regExp.lastIndex);//每次执行后从哪开始重新匹配？
+    }
+    
+
+
+    //exec()方法
+
+    var pattern = /box/ig;
+    var str = "This is a Box!This is a box!";
+    console.log(pattern.exec(str),pattern.lastIndex);
+    console.log(pattern.exec(str),pattern.lastIndex);
+    console.log(pattern.exec(str),pattern.lastIndex);
+    console.log(pattern.exec(str),pattern.lastIndex);
+    console.log(pattern.exec(str),pattern.lastIndex);
+
+
+    var pattern = /box/ig;
+    var str = "This is a Box!This is a box!";
+    while (match = pattern.exec(str)) {
+      console.log(match[0]);
+    }
+
+    //案例：结合定位匹配
+    console.log(/oo/.test("moon"));
+    console.log(/oo\b/.test("moon"));
+    console.log(/oon\b/.test("moon"));
+    console.log(/\boo/.test("moon"));
+
+    console.log(/oo\B/.test("moon"));
+    console.log(/oon\B/.test("moon"));
+    console.log(/oo\B/.test("moon"));
+    console.log(/\Boo\B/.test("moon"));
+  </script>
+</body>
+
+</html>

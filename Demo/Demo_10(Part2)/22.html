@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+    
+      //公有属性、私有属性、特权方法
+      function A(id) {
+          this.publicId = id;
+          var privateId = 456;
+          this.getId = function () {
+              console.log(this.publicId,privateId);
+          };
+      }
+      var a = new A(123);
+      console.log(a.publicId);
+      // console.log(a.privateId);
+      a.getId();
+
+
+      //思考哪些是true，哪些是false
+      function Person(name){
+        this.name = name;
+      }
+      Person.prototype.getName = function(){}
+      // Person.prototype = { //测试如果更改了Person.prototype输出又会变成什么?
+      // 	getName:function(){}
+      // }
+      var p = new Person("jack");
+      console.log(p.__proto__ === Person.prototype);//true or false?
+      console.log(p.__proto__ === p.constructor.prototype);//true or false?
+      console.log(Object.prototype === p.constructor.prototype);//true or false?
+      console.log(({getName:function(){}}).__proto__ === p.constructor.prototype);//true or false?
+
+
+      //JavaScript万物诞生记
+      //https://zhuanlan.zhihu.com/p/22989691
+      /*
+      //
+      function A(){
+          this.a = 10;
+          this.af = function(){console.log(this.a);}
+      }
+      var a = new A();
+
+      function B(){
+          A.call(this);
+          this.b = 20;
+          this.bf = function(){console.log(this.a);}
+      }
+      B.prototype.__proto__ = A.prototype;
+      var b = new B();
+      console.log(b.__proto__ === B.prototype);
+      console.log(b.__proto__.__proto__ === A.prototype);
+      console.log(b.__proto__.__proto__.__proto__ === Object.prototype);
+
+      //ES6 class 语法糖 本质是原型继承 后续参见ES6部分
+      class C{
+          constructor(){
+
+          }
+      }
+      class D extends C{
+          constructor(){
+              super();
+          }
+      }
+      var c = new C();
+      var d = new D();
+
+      c.__proto__ === C.prototype//true
+      console.log(d.__proto__ === D.prototype);//输出true
+      console.log(d.__proto__.__proto__ === C.prototype);//输出true
+      console.log(d.__proto__.__proto__.__proto__ === Object.prototype);//输出true
+
+      */
+    </script>
+  </body>
+</html>

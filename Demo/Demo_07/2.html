@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        list-style: none;
+      }
+
+      body {
+        padding-top: 50px;
+        text-align: center;
+      }
+
+      div {
+        width: 400px;
+        height: 350px;
+        border: 5px solid red;
+        margin: 0 auto;
+      }
+
+      ul {
+        display: flex;
+      }
+
+      li {
+        width: 100px;
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer;
+      }
+
+      li.active {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      p {
+        text-align: center;
+        margin-top: 100px;
+        font-size: 44px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <ul>
+        <li class="active">导航0</li>
+        <li>导航1</li>
+        <li>导航2</li>
+        <li>导航3</li>
+      </ul>
+      <p id="contents">点击了0</p>
+    </div>
+    <script>
+      //练习
+      var tabs = document.getElementsByTagName("li");
+      var contents = document.getElementById("contents");
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].onclick = function() {
+          for (var j = 0; j < tabs.length; j++) {
+            tabs[j].className = "";
+          }
+          this.className = "active";
+          contents.innerHTML = "点击了" + i;
+        };
+      }
+      /*
+      var i = 0;
+      tabs[0].onclick = function() {
+        contents.innerHTML = "点击了" + i;
+      };
+      i++;
+      tabs[1].onclick = function() {
+        contents.innerHTML = "点击了" + i;
+      };
+      i++;
+      tabs[2].onclick = function() {
+        contents.innerHTML = "点击了" + i;
+      };
+      i++;
+      tabs[3].onclick = function() {
+        contents.innerHTML = "点击了" + i;
+      };
+      i++; //4
+      */
+
+      // 以下为闭包和IIFE的补充案例,阅读和思考
+
+      //////////应用案例 实现数据的封装
+      var db = (function() {
+      // 创建一个隐藏的object, 这个object持有一些数据
+      // 从外部是不能访问这个object的
+          var data = {};
+      // 创建一个函数, 这个函数提供一些访问data的数据的方法
+          return function(key, val) {
+              if (val === undefined) { return data[key] } // get
+              else { return data[key] = val } // set
+          };
+      // 我们可以调用这个匿名方法
+      // 返回这个内部函数，它形成了一个闭包
+      })();
+
+      db('x'); // 返回 undefined
+      db('x', 1); // 设置data['x']为1
+      db('x'); // 返回 1
+      // 我们不能直接访问data这个object本身
+      // 但是我们可以设置它的成员
+
+
+      //////////////其他实例///////
+      (function () {
+          var m = 0;
+          function getM(){
+              return m;
+          }
+          function setM(val){
+              m = val;
+          }
+          window.g = getM;
+          window.f = setM;
+      }());
+      f(100);
+      g();
+
+      //注意闭包与不经意的变量共享
+      function f(){
+          var result = [];
+          for (var i = 0; i < 3; i++) {
+              //(function(){
+                  var pos = i;
+                  var func = function(){
+                      return pos;//若是return i;的话最终输出是几？
+                  }
+                  result.push(func);
+                  //console.log(i,pos);
+              //}());
+          }
+          return result;
+      }
+      console.log(f()[1]());// 输出 1？ 2？ 3？（没和没有IIFE时，返回i和pos时的区别）
+
+
+    </script>
+  </body>
+</html>
